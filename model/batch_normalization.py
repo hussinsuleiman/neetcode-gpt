@@ -20,12 +20,11 @@ class Solution:
             mu = np.mean(x, axis=0)
             var = np.var(x, axis=0)
             x_hat = (x-mu) / np.sqrt(var + eps)
-            y = np.round(gamma*x_hat + beta, 4)
             running_mean = np.round((1-momentum) * running_mean + momentum * mu, 4)
             running_var = np.round((1-momentum) * running_var + momentum * var, 4)   
         
         else:
             x_hat = (x - running_mean) / np.sqrt(running_var + eps)
-            y = np.round(gamma * x_hat + beta, 4)
         
+        y = np.round(gamma * x_hat + beta, 4)
         return (y.tolist(), running_mean.tolist(), running_var.tolist())
